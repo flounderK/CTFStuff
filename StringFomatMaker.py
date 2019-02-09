@@ -17,8 +17,13 @@ def main(args):
     if args.address and args.address[:2] == "0x" and len(args.address) == 10:
         address = bytes.fromhex(args.address[2:])
         address = "".join([hex(i).replace("0x", "\\x") for i in address[::-1]])
+        if len(value_to_write) == 8:
+            #2 needs to be added to this address
+            bytes_to_change = address[:4].replace("\\x", "")
+            address = address[4:] + address
+            address = hex(int(bytes_to_change, 16) + 2).replace("0x", "\\x") + address
 
-        shell_string = "$(python -c \"print '{:s}'\")".format(address * int(len(value_to_write)/4))
+        shell_string = "$(python -c \"print '{:s}'\")".format(address)
 
     if len(value_to_write) == 8:
         low_order_bytes = int(value_to_write[4:], 16)

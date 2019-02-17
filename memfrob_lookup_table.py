@@ -22,12 +22,19 @@ class memfrob_lookup_table:
         for i in range(0, l, 2):
             yield hex[i:min(i + 2, l)]
 
-    def lookup(self, value):
+    def lookup_word(self, value, printable=False):
         hex = struct.pack("I", value).hex()
         result = list()
         for i in self.__get_bytes(hex):
             result.append(self.lookup_map[i])
+        if printable:
+            print("{:s}{:s}".format("\\x", "\\x".join(result)))
         return result
 
-    def printable_lookup(self, value):
-        print("{:s}{:s}".format("\\x", "\\x".join(self.lookup(value))))
+    def lookup_single_byte(self, byte_value, printable=False):
+        """This is necessary because some part of lookup defaults to 4 bytes
+        and the first 3 are just assumed to be 00."""
+        result = self.lookup_word(byte_value)[0]
+        if printable:
+            print("{:s}{:s}".format("\\x", result))
+        return result

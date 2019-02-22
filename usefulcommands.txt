@@ -1,0 +1,19 @@
+useful comandline usefulness:
+use this instead of redirecting a file to stdin, it will let you interact with the application
+(python -c "print '<payload>'";cat -) | /path/to/application
+
+Helps if your payload has a \x20 in it, this will keep it all a part of the same string
+"$(python -c "print '<payload>'")"
+
+For race conditions related to file path inputs (remove T flag if file must be seen as a symbolic link). Just throw this in a second terminal 
+while [ 1 ]; do ln -sfT /link/points/to/valid/file /link/location; ln -sfT /link/points/to/invalid/file /link/location; done
+
+
+compiling an insecure binary
+gcc -Wall -m32 -fPIC -DPIC -fno-stack-protector -c badlib.c
+ld -m elf_i386 -shared -o badlib.so badlib.o -ldl
+
+store your shellcode in environment variables
+export EGG=$(python -c "print '<payload>")
+
+nasm -f elf my_bin.asm; ld -m elf_i386 -s -o my_bin my_bin.o

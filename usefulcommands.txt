@@ -16,4 +16,9 @@ ld -m elf_i386 -shared -o badlib.so badlib.o -ldl
 store your shellcode in environment variables
 export EGG=$(python -c "print '<payload>")
 
+for compiling assembly
 nasm -f elf my_bin.asm; ld -m elf_i386 -s -o my_bin my_bin.o
+
+to get the opcodes from the binary you've compiled (this is definitly not the best way to do this)
+objdump -d <binary>
+

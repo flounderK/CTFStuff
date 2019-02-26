@@ -22,3 +22,25 @@ nasm -f elf my_bin.asm; ld -m elf_i386 -s -o my_bin my_bin.o
 to get the opcodes from the binary you've compiled (this is definitly not the best way to do this)
 objdump -d <binary>
 
+https://netsec.ws/?p=337 has a good list, but i'll put them here in case the website isn't up forever, since it looks like that site is  not often updated
+"""
+
+Shell Spawning
+
+python -c 'import pty; pty.spawn("/bin/sh")'
+echo os.system('/bin/bash')
+/bin/sh -i
+perl —e 'exec "/bin/sh";'
+perl: exec "/bin/sh";
+ruby: exec "/bin/sh"
+lua: os.execute('/bin/sh')
+(From within IRB)
+exec "/bin/sh"
+(From within vi)
+:!bash
+(From within vi)
+:set shell=/bin/bash:shell
+(From within nmap)
+!sh
+
+"""

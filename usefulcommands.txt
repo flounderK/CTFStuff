@@ -44,3 +44,8 @@ exec "/bin/sh"
 !sh
 
 """
+
+you can make some calls out like this and receive some too
+http://xmodulo.com/tcp-udp-socket-bash-shell.html
+exec {file-descriptor}<>/dev/{protocol}/{host}/{port}
+exec 3<>/dev/tcp/xmodulo.com/80

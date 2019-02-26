@@ -1,0 +1,1 @@
+gcc -m32 -z execstack -z norelro -fno-stack-protector pwn.c -o pwn

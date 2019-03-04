@@ -1,0 +1,31 @@
+This will most likely be seperated out into multiple different files once I have enough content, but for now one will do.
+
+How to go about working on different categories of problems:
+
+Overall:
+1.) Find out what the general format for the flag will look like. 
+  This can help you and your team out by giving you a pattern to match with regex thoughout the CTF and so that you all 
+  generally know what to look for. Regex isn't always a valid answer, but regex is a great way to brute force life.
+2.) Find out how the flag is going to be read out. 
+  That is, discover whether a local version of the challenge will produce a flag or if you will need to connect to 
+  a server to get the real flag. This will help you determine whether you will need to write your exploit/solution to work
+  around sockets and in general can change what you try to do to solve the challenge. 
+
+Reversing:
+  - Getting a copy of the binary/program
+If you don't have a copy of the program from the start, getting a copy of it should be your top priority. 
+If this is the case `/proc/self/exe` and `/proc/self/cmdline` may help, as they are symlinks to the executable 
+of the current process and a file containing the command used to call the current process on the commandline respectively.
+
+Unless you are already dropped into a shell, getting a copy of the binary will probably involve you exploiting it in some 
+regard, so use the server connection to explore the binary and test every input that you can for flaws. Check for error output,
+evidence of file operations, and see if you can determine if the program is an executable, shell script, python script, ect.
+Directory traversal would be easiest, but work with whatever you can find
+
+`echo "2\n<payload>\n" | nc <server> <port> > copied_binary`
+
+Once you have a binary, make a backup. You never know when a binary might delete itself. 
+
+
+
+

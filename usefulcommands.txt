@@ -59,4 +59,5 @@ nc -lvp 7003
 compress file to stdout:
 cat file.txt | gzip -f > file.txt.gz
 
-
+Find the important binarys, if you're lucky they are custom built
+find / -perm -u=s -type f 2>/dev/null

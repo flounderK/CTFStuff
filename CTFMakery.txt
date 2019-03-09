@@ -1,1 +1,7 @@
 gcc -m32 -z execstack -z norelro -fno-stack-protector pwn.c -o pwn
+
+# for hosting problems with socat and netcat:
+sed -i "s/ALL ALL/#ALL: ALL/g" /etc/hosts.deny 
+socat -d -d TCP4-LISTEN:<port>,tcpwrap=script,reuseaddr,fork EXEC:'<command>',stderr,pty
+
+

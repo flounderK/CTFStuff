@@ -1,6 +1,8 @@
 from ropper import RopperService
 import argparse
 import itertools
+import re
+import pwn
 
 parser = argparse.ArgumentParser()
 parser.add_argument("filepath", help="File to get gadgets from")
@@ -12,6 +14,30 @@ options = {'color': False,
            'inst_count': 6,
            'type': 'all',
            'detailed': False}
+
+
+class arbitraryWrite:
+    def __init__(self, popper, mover):
+        self.popper = popper
+        self.mover = mover
+
+    def get_chain(self, to_addr: int, value: int):
+        payload = pwn.p32(self.popper)
+        payload += pwn.p32(to_addr)
+        payload += pwn.p32(value)
+        payload += pwn.p32(self.mover)
+        return payload
+
+    def write_string(self, start_addr: int, string: str):
+        n = 4
+        length = len(string)
+        payload = b''
+        for word in range(0, length, n):
+            hexed = string[word:min(word + n, length)]
+            to_addr = start_addr + word
+            value = int("0x" + "".join([hex(ord(character))[2:] for character in hexed[::-1]]), 0)
+            payload += self.get_chain(to_addr, value)
+        return payload
 
 
 def find_useful_pop_rets(rs, filename):

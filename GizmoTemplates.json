@@ -1,0 +1,1 @@
+[{"name": "arbitrary_write", "Constants": ["popper", "mover"], "Parameters": ["write_addr", "value"], "Queue": ["popper", "write_addr", "value", "mover"]}, {"name": "call_system", "Constants": ["system"], "Parameters": ["Junk", "command_addr"], "Queue": ["system", "Junk", "command_addr"]}]

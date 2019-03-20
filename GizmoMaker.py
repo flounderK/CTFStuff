@@ -1,4 +1,5 @@
 import struct
+import json
 
 
 class GizmoMaker:
@@ -47,6 +48,13 @@ class GizmoMaker:
                 "Constants": list(),
                 "Parameters": list(),
                 "Queue": list()}
+
+    def load_templates(self, json_path):
+        """Load templates from a json file. Structure of json should be [template, template, etc...]"""
+        with open(json_path, "r") as f:
+            json_content = json.load(f)
+        for template in json_content:
+            self.add_template(template)
 
 
 def example_usage():

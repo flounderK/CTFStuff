@@ -6,4 +6,4 @@ sed -i "s/IF(IS_DIRECTORY \${curdir}\/\${child})/IF(IS_DIRECTORY \${curdir}\/\${
 sed -i "s/#include <cstring>/#include <cstring>\n#include <stdio.h>/g" ./src/lecture/cpp/cpp_lec02.cpp
 cmake .
 sed -i "s/CXX_FLAGS =  -m32 -O0 -fno-inline-functions/CXX_FLAGS =  -m32 -O0 -fno-inline-functions -std=c++11/g" ./src/lecture/cpp/CMakeFiles/cpp_lec02.dir/flags.make
-make all
+make all && make install

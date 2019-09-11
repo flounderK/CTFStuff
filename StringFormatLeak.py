@@ -45,8 +45,8 @@ if __name__ == "__main__":
                      help="string to decode, little endian is assumed",
                      type=str, required=True)
     args = parser.parse_args()
-    
-    if args.func is not None:
+
+    if args.__contains__('func'):
         kwargs = {k: v for k, v in args._get_kwargs() if k != 'func'}
         for i in args.func(**kwargs):
             if isinstance(i, bytes):

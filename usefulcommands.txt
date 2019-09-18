@@ -68,3 +68,8 @@ python -c "import sys,struct;x=lambda a:struct.pack('I', a);sys.stdout.buffer.wr
 python2.7 -c "import struct;x=lambda a:struct.pack('I', a);print x(0x41414141)"
 
 
+# To add the current directory to your library load path
+LD_LIBRARY_PATH=/usr/lib:$PWD
+export LD_LIBRARY_PATH
+
+

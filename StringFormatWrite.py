@@ -82,15 +82,14 @@ def new_make_fmt_string(address_to_write_to, value_to_write, offset=1):
     if address_to_write_to > 0xffffffff:
         address_size = 8
         pack_symb = '<Q'
-    payload_values = list()
-    original_index = 0
+    ordered_bytes = list()
     while val > 0:
-        payload_values.append((val & 0xffff, original_index))
+        ordered_bytes.append(val & 0xffff)
         val = val >> 16
-        original_index += 1
+    payload_values = [(value, i) for i, value in enumerate(ordered_bytes[::-1])]
     # sorted by value from least to greatest, add the preserved index to the calculated offset
     payload_values.sort(key=lambda a: a[0])
-    payload_values = [(address_to_write_to + (indx * 2), (value - (indx * address_size), indx + offset))
+    payload_values = [(address_to_write_to + (indx * 2), (value - (len(payload_values) * address_size), indx + offset))
                       for value, indx in payload_values]
 
     if len(payload_values) > 1:

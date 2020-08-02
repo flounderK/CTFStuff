@@ -9,10 +9,10 @@ def batch(it, siz):
 
 
 def gen_format_strings(start, end,  batchsize):
-    fmt = ".%{0}$08X"
-    octet_fmt_strings = [fmt.format(i).encode() for i in range(start, end)]
+    fmt = b"%%%d$08X"
+    octet_fmt_strings = [fmt % i for i in range(start, end)]
     for format_string_list in batch(octet_fmt_strings, batchsize):
-        payload = b"".join(format_string_list)
+        payload = b".".join(format_string_list)
         yield payload
 
 
@@ -33,15 +33,15 @@ if __name__ == "__main__":
     gen.set_defaults(func=gen_format_strings)
     gen.add_argument("--start", "-s", help="integer to start at",
                      type=int, required=True)
-    gen.add_argument("--end", "-e", help="integer to end at", 
+    gen.add_argument("--end", "-e", help="integer to end at",
                      type=int, required=True)
-    gen.add_argument("--batchsize", "-b", 
+    gen.add_argument("--batchsize", "-b",
                      help="number of octets to print per formatstring",
                      type=int, required=True)
     dec = subparsers.add_parser("decode", aliases=["d"])
     dec.set_defaults(func=decode_output)
 
-    dec.add_argument("--string", "-s", 
+    dec.add_argument("--string", "-s",
                      help="string to decode, little endian is assumed",
                      type=str, required=True)
     args = parser.parse_args()
